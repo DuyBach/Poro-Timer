@@ -11,10 +11,24 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.duybach.porodorotimer.MainActivity"
-    tools:showIn="@layout/app_bar_main">
+    tools:showIn="@layout/app_bar_main" >
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!" />
+
+    <Button
+        android:text="Start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:height="60dp"
+        android:background="@color/colorRed"
+        android:textColor="@color/colorWhite" />
 </RelativeLayout>
