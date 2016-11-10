@@ -58,23 +58,21 @@
     </LinearLayout>
 
     <ListView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
+        android:background="@color/colorRedLight"
+        android:layout_above="@+id/LinearLayout0"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_height="250dp"
-        android:background="@color/colorRedLight"
-        android:layout_below="@+id/textClock3"
-        android:layout_above="@+id/LinearLayout0" />
+        android:id="@+id/logging"
+        android:layout_height="250dp" />
 
-    <TextClock
+    <TextView
+        android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textClock3"
-        android:textSize="90sp"
+        android:id="@+id/textView2"
+        android:textSize="77sp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:timeZone="GMT+0100"
-        android:format24Hour="hh:mm"
-        android:layout_marginTop="-15dp" />
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

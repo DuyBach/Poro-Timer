@@ -3,6 +3,7 @@ package com.duybach.porodorotimer;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,9 +13,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    Button main;
+    Button focus;
+    Button shortBreak;
+    Button longBreak;
+    String latestTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +44,53 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        main = (Button) findViewById(R.id.button);
+        focus = (Button) findViewById(R.id.button2);
+        shortBreak = (Button) findViewById(R.id.button3);
+        longBreak = (Button) findViewById(R.id.button4);
+
+        final ArrayList<String> loggings = new ArrayList<String>();
+
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, android.R.id.text1, loggings);
+
+        ListView listView = (ListView) findViewById(R.id.logging);
+        listView.setAdapter(adapter);
+
+        View.OnClickListener oclBtnOk = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int id = view.getId();
+
+                if (id == R.id.button) {
+                    Log.v("Test", "Pressed main");
+                    // ListView logging = (ListView) findViewById(R.id.logging);
+                    loggings.add(latestTime);
+                    adapter.notifyDataSetChanged();
+                } else if (id == R.id.button2) {
+                    Log.v("Test", "Pressed focus");
+                    TextView timer = (TextView) findViewById(R.id.textView2);
+                    timer.setText("25:00");
+                    latestTime = "25:00";
+                } else if (id == R.id.button3) {
+                    Log.v("Test", "Pressed shortBreak");
+                    TextView timer = (TextView) findViewById(R.id.textView2);
+                    timer.setText("5:00");
+                    latestTime = "5:00";
+                } else if (id == R.id.button4) {
+                    Log.v("Test", "Pressed longBreak");
+                    TextView timer = (TextView) findViewById(R.id.textView2);
+                    timer.setText("15:00");
+                    latestTime = "15:00";
+                }
+            }
+        };
+
+        main.setOnClickListener(oclBtnOk);
+        focus.setOnClickListener(oclBtnOk);
+        shortBreak.setOnClickListener(oclBtnOk);
+        longBreak.setOnClickListener(oclBtnOk);
     }
 
     @Override
