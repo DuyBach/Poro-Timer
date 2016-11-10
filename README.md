@@ -1,3 +1,3 @@
-# Poro-Timer
+# Poro Timer
 
 // TODO
