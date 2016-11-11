@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity
                 if (id == R.id.button) {
                     Log.v("Test", "Pressed main");
                     // ListView logging = (ListView) findViewById(R.id.logging);
-                    loggings.add(latestTime);
+                    loggings.add(0, latestTime);
                     adapter.notifyDataSetChanged();
                 } else if (id == R.id.button2) {
                     Log.v("Test", "Pressed focus");
