@@ -23,7 +23,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:background="@color/colorRed"
+        android:backgroundTint="@color/colorRed"
         android:textColor="@color/colorWhite"
         android:height="65dp" />
 
@@ -64,7 +64,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:id="@+id/logging"
-        android:layout_height="250dp" />
+        android:layout_height="250dp"
+        android:layout_margin="5dp" />
 
     <TextView
         android:text="TextView"
