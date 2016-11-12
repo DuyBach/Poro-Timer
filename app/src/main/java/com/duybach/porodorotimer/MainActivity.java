@@ -1,6 +1,9 @@
 package com.duybach.porodorotimer;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Vibrator;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
@@ -27,7 +30,13 @@ public class MainActivity extends AppCompatActivity
     Button focus;
     Button shortBreak;
     Button longBreak;
-    String latestTime;
+    int latestTime = 0;
+    ArrayList<String> loggings;
+    ArrayAdapter<String> adapter;
+    TextView timerField;
+    boolean activeTimer = false;
+    CountDownTimer timer;
+    Vibrator v;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,10 +59,14 @@ public class MainActivity extends AppCompatActivity
         shortBreak = (Button) findViewById(R.id.button3);
         longBreak = (Button) findViewById(R.id.button4);
 
-        final ArrayList<String> loggings = new ArrayList<String>();
+        timerField = (TextView) findViewById(R.id.textView2);
 
-        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, android.R.id.text1, loggings);
+        loggings = new ArrayList<String>();
+
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
+                                           android.R.id.text1, loggings);
+
+        timerField.setText("0:00");
 
         ListView listView = (ListView) findViewById(R.id.logging);
         listView.setAdapter(adapter);
@@ -64,25 +77,73 @@ public class MainActivity extends AppCompatActivity
                 int id = view.getId();
 
                 if (id == R.id.button) {
-                    Log.v("Test", "Pressed main");
-                    // ListView logging = (ListView) findViewById(R.id.logging);
-                    loggings.add(0, latestTime);
-                    adapter.notifyDataSetChanged();
+                    Log.v("Button Pressed", "main");
+
+                    if (latestTime > 0 & !activeTimer) {
+                        timer = new CountDownTimer(latestTime * 60000, 1000) {
+                            public void onTick(long millisUntilFinished) {
+                                int minutes = (int) ((millisUntilFinished / 1000) / 60);
+                                int seconds = (int) ((millisUntilFinished / 1000) % 60);
+
+                                activeTimer = true;
+
+                                if (minutes == 0) {
+                                    timerField.setText(
+                                            seconds + "s"
+                                    );
+                                } else {
+                                    if (seconds < 10) {
+                                        timerField.setText(
+                                                minutes + ":0" + seconds
+                                        );
+                                    } else {
+                                        timerField.setText(
+                                                minutes + ":" + seconds
+                                        );
+                                    }
+                                }
+                            }
+
+                            public void onFinish() {
+                                activeTimer = false;
+                                timerField.setText("done!");
+                                v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                                long[] pattern = {0, 500, 500, 500, 500, 500};
+                                v.vibrate(pattern, -1);
+                                loggings.add(0, Integer.toString(latestTime) + ":00");
+                                adapter.notifyDataSetChanged();
+                                main.setText("Start");
+                            }
+                        }.start();
+
+                        main.setText("Stop");
+                    } else {
+                        if (activeTimer) {
+                            timer.cancel();
+                            activeTimer = false;
+                        }
+
+                        timerField.setText("0:00");
+                        main.setText("Start");
+                    }
                 } else if (id == R.id.button2) {
-                    Log.v("Test", "Pressed focus");
-                    TextView timer = (TextView) findViewById(R.id.textView2);
-                    timer.setText("25:00");
-                    latestTime = "25:00";
+                    Log.v("Button Pressed", "focus");
+                    if (!activeTimer) {
+                        timerField.setText("25:00");
+                        latestTime = 25;
+                    }
                 } else if (id == R.id.button3) {
-                    Log.v("Test", "Pressed shortBreak");
-                    TextView timer = (TextView) findViewById(R.id.textView2);
-                    timer.setText("5:00");
-                    latestTime = "5:00";
+                    Log.v("Button Pressed", "shortBreak");
+                    if (!activeTimer) {
+                        timerField.setText("5:00");
+                        latestTime = 5;
+                    }
                 } else if (id == R.id.button4) {
-                    Log.v("Test", "Pressed longBreak");
-                    TextView timer = (TextView) findViewById(R.id.textView2);
-                    timer.setText("15:00");
-                    latestTime = "15:00";
+                    Log.v("Button Pressed", "longBreak");
+                    if (!activeTimer) {
+                        timerField.setText("15:00");
+                        latestTime = 15;
+                    }
                 }
             }
         };

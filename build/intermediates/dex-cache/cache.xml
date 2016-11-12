@@ -16,7 +16,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
-        sha1="987587af12e96cdac1f34d834aa2e576ae808136">
+        sha1="534776b392f26e9a99220152a224bcccee767b85">
         <dex dex="D:\Users\duybach\Documents\GitHub\Poro Timer\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_723292995e11a6491aba6b97161fd5146946d0d2\classes.dex" />
     </item>
     <item
@@ -43,7 +43,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
-        sha1="26d11fc0a784fb7441e08dd6390e16b8c0bb4167">
+        sha1="cc479dccd5f35e97cf66db7f7f1d48713665e2d8">
         <dex dex="D:\Users\duybach\Documents\GitHub\Poro Timer\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_a212976acf004c90de8216f65a84e31a9122de7d\classes.dex" />
     </item>
     <item
